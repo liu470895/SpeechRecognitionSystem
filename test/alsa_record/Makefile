@@ -5,7 +5,7 @@ CC:=$(CROSS)gcc
 
 export TOPDIR CC
 
-TARGET:=alsa_record
+TARGET:=alsa_record.elf
 
 CPPFLAGS:=-I $(TOPDIR)inc
 LDFLAGS:=-L $(TOPDIR)lib
