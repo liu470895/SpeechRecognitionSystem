@@ -1,4 +1,4 @@
-TOPDIR:=./
+TOPDIR:=../../
 
 CROSS:=arm-linux-gnueabi-
 CC:=$(CROSS)gcc
