@@ -1,3 +1,5 @@
 *.o
 *.d
 *.elf
+*.wav
+*.swp
