@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
 	/*转换服务器的ip地址为网络字节序*/
 	srv.sin_family = AF_INET;
-	srv.sin_port = htonl(atoi(argv[2])); 
+	srv.sin_port = htons(atoi(argv[2])); 
 	srv.sin_addr.s_addr = inet_addr(argv[1]); //172.xx.xx.xx
 
 	int err = connect(sfd, (struct sockaddr*)&srv, srv_len);
