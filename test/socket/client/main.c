@@ -55,7 +55,12 @@ int main(int argc, char *argv[])
 	{
 		bzero(buf, BUFF_SIZE);
 		n = read(sfd, buf, BUFF_SIZE-1);
-		printf("read=%s\n", buf);
+		if(n == 0)
+		{
+			break;
+		}
+		printf("read %dbytes:%s\n", n, buf);
+		sleep(1);
 		write(sfd, buf, n);
 	}
 	

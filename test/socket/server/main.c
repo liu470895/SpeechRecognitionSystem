@@ -31,6 +31,9 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
+	int on = 1;
+	setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, (void *)&on, sizeof(on));
+
 	struct sockaddr_in srv;
 	int srv_len = sizeof srv;
 	bzero(&srv, srv_len);
@@ -55,11 +58,12 @@ int main(int argc, char *argv[])
 	}
 
 	struct sockaddr_in cli;
-	int cli_len;
+	socklen_t cli_len;
 	bzero(&cli, sizeof cli);
 
 	printf("watting someboby connect.\n");
 	int cfd = accept(sfd, (struct sockaddr*)&cli, &cli_len);
+	//int cfd = accept(sfd, NULL, NULL);
 	if(cfd == -1)
 	{
 		perror("accept() error");
@@ -76,8 +80,12 @@ int main(int argc, char *argv[])
 		write(cfd, msg, strlen(msg));	
 		bzero(buf, BUFF_SIZE);
 		n = read(cfd, buf, BUFF_SIZE-1);
-
+		if(n == 0)
+		{
+			break;
+		}
 		printf("read %dbytes:%s\n", n, buf);
+		sleep(1);
 	}
 	return 0;
 }
